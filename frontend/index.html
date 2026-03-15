@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аудио классификатор</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Подключение собственных стилей и скриптов -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <nav id="navigation"></nav>
+
+        <!-- Страница входа -->
+        <div id="login-page" class="page">
+            <h2>Вход</h2>
+            <form id="login-form">
+                <div>
+                    <label>Имя пользователя</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div>
+                    <label>Пароль</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit">Войти</button>
+                <p id="login-error" class="error"></p>
+            </form>
+        </div>
+
+        <!-- Страница дашборда (пользователь) -->
+        <div id="dashboard-page" class="page">
+            <h2>Дашборд</h2>
+            <div id="upload-section">
+                <h3>Загрузить тестовый датасет (.npz)</h3>
+                <form id="upload-form">
+                    <div>
+                        <input type="file" id="file-input" accept=".npz" required>
+                    </div>
+                    <button type="submit" id="upload-btn">Загрузить и анализировать</button>
+                </form>
+                <p id="upload-error" class="error"></p>
+                <p id="upload-success" class="success"></p>
+            </div>
+
+            <div id="metrics-section" style="display: none;">
+                <h3>Общие показатели</h3>
+                <div class="metrics">
+                    <div class="metric-card">
+                        <h4>Точность (Accuracy)</h4>
+                        <p id="accuracy-value">-</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Потери (Loss)</h4>
+                        <p id="loss-value">-</p>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <!-- График 1: История обучения -->
+                    <div class="chart-container">
+                        <canvas id="history-chart"></canvas>
+                    </div>
+                    <!-- График 2: Распределение классов (обучение) -->
+                    <div class="chart-container">
+                        <canvas id="class-count-chart"></canvas>
+                    </div>
+                    <!-- График 3: Точность по тестовым образцам -->
+                    <div class="chart-container">
+                        <canvas id="test-accuracy-chart"></canvas>
+                    </div>
+                    <!-- График 4: Топ-5 классов (валидация) -->
+                    <div class="chart-container">
+                        <canvas id="top5-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Страница профиля -->
+        <div id="profile-page" class="page">
+            <h2>Профиль</h2>
+            <div id="profile-info">
+                <p><strong>Имя:</strong> <span id="profile-firstname"></span></p>
+                <p><strong>Фамилия:</strong> <span id="profile-lastname"></span></p>
+                <p><strong>Имя пользователя:</strong> <span id="profile-username"></span></p>
+                <p><strong>Роль:</strong> <span id="profile-role"></span></p>
+            </div>
+        </div>
+
+        <!-- Страница админа (создание пользователей) -->
+        <div id="admin-page" class="page">
+            <h2>Администрирование</h2>
+            <h3>Создать нового пользователя</h3>
+            <form id="create-user-form">
+                <div>
+                    <label>Имя пользователя *</label>
+                    <input type="text" id="new-username" required>
+                </div>
+                <div>
+                    <label>Имя *</label>
+                    <input type="text" id="new-firstname" required>
+                </div>
+                <div>
+                    <label>Фамилия *</label>
+                    <input type="text" id="new-lastname" required>
+                </div>
+                <div>
+                    <label>Пароль *</label>
+                    <input type="password" id="new-password" required>
+                </div>
+                <div>
+                    <label>Роль</label>
+                    <select id="new-role">
+                        <option value="user">Пользователь</option>
+                        <option value="admin">Администратор</option>
+                    </select>
+                </div>
+                <button type="submit">Создать</button>
+                <p id="admin-error" class="error"></p>
+                <p id="admin-success" class="success"></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
