@@ -69,9 +69,11 @@ class UploadView(APIView):
         artifacts_dir = base_dir / "artifacts"
 
         history = self._load_json(artifacts_dir / "history.json", default={
-            "epochs": [],
+            "epoch": [],
+            "accuracy": [],
             "val_accuracy": [],
             "train_loss": [],
+            "loss": [],
             "val_loss": [],
         })
 
